@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style type="text/css">
+  
+  body{
+    margin:0;
+    padding:0;
+    font-family:'Open Sans',sans-serif;
+    background:url("../resources/bg.jpg");
+    background-size:122% 100%;
+    background-repeat:no-repeat;
+  }
+  .node {
+    cursor: pointer;
+  }
+
+   
+  .overlay{
+  }
+   
+  .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+  
+  .node text {
+    font-size:15px; 
+    font-family:'Open Sans',sans-serif;
+    font-weight:bold;
+  }
+   
+  .link {
+    fill: none;
+    stroke: #ddd;
+    stroke-width: 1.5px;
+  }
+
+  .templink {
+    fill: none;
+    stroke: red;
+    stroke-width: 3px;
+  }
+
+  .ghostCircle.show{
+      display:block;
+  }
+
+  .ghostCircle, .activeDrag .ghostCircle{
+       display: none;
+  }
+
+  .se-pre-con {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url(../resources/Preloader_5.gif) center no-repeat #fff;
+    }
+
+</style>
+
+<script src="js/jquery.min.js"></script>
+<head>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<title>
+IITK Family Tree
+</title>
+<link rel="shortcut icon" href="../images/logo.png">
+<script>
+    $(document).ready(function() {
+    // Animate loader off screen
+    $(".se-pre-con").fadeOut(3000);
+    
+    $(window).keydown(function(event){
+	if(event.keyCode == 13) {
+	event.preventDefault();
+	return false;   
+	}	
+    });
+}); 
+</script>
+    <script src="js/d3.v3.min.js"></script>
+    <script src="js/dndTree.js"></script>
+</head>
+<body> 
+    <div id="tree-container">
+    </div>
+    <div class="se-pre-con"></div>
+
+    <div style = "z-index:10000;background-color:#111; opacity:0.8; position:fixed;top:0;width:100%;left:0; padding: 0.4em; border-radius:0.2em;">
+    	<p style = "font-size:80%;float:right; margin-right:1%;vertical-align:middle">
+	    <a style = "color:white; text-decoration:none;" target ="_none_" href = "https://docs.google.com/forms/d/1wTsK3qDO2ZHWO7B7utLiglgYZKVatuwy5Ne7u3uTEPw/viewform">Report an error</a>
+    	</p>
+    	<form id="search" style = "float:left;font-size: 80%; color:white; vertical-align:middle">
+		Search:  
+		<INPUT TYPE="text" id="input" VALUE="" style = "opacity:1;border-radius:0.3em">
+		<INPUT TYPE="button" id="button" Value="Click to search" style = "opacity:1;color:black; border-radius:0.3em">
+	<br>
+	<b><a id = "instruct" href = "#" style = "color:white">Instructions</a></b> 
+	<div id = "instr" style = "display:none">
+	1. Search for any roll number or string, click on an option if it's presented to you <br>2. Search works only if the node is open(initially all nodes are open).<br>3. Mouse scroll for zooming.<br>4. Drag empty screen area for panning.<br>5. Hovering shows the student's image.<br>6. Click a node to toggle children.
+	</div>
+	</form>
+    </div>
+
+    <div id = "searchface" style = "display:none;height:90%;overflow-y:scroll;position:fixed; top: 4em; width:100%;">
+    </div>
+    <style>
+	.faces{
+	    position:relative;
+	    width:7.3%;
+	    padding:0.4em;
+	    border-radius:0.4em;
+	    color:white;
+	    float:left;
+	    height: 12em;
+	    cursor: pointer;
+	}
+
+	.faceimg{
+	    width:100%;
+	    opacity:1.0;
+	    border-radius:0.4em;
+	}
+
+	.facename{
+	    background-color:#111;
+	    opacity:0.8;
+	    padding:0.3em;
+	    border-radius:0.3em;
+	    font-weight:bold;
+	    font-size:50%;
+	}
+    </style>
+   <div id = "facediv" style = "position:fixed;bottom:0;right:0;display:none; width:10%;padding:0.4em;border-radius:0.4em;color:white;">
+	<img id = "face" src = "" style="width:100%;opacity:1.0; border-radius:0.4em"/>
+	<p id = "facename" class = "facename" style="font-size:100%" align = "center"></p>
+   </div>
+   
+</body>
+<script>
+    $(document).ready(function(){
+	$("#instruct").click(function(){
+	    $("#instr").slideToggle(300);
+	});
+    });
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53775284-3', 'auto');
+  ga('send', 'pageview');
+</script>
+</html>

@@ -1,0 +1,4 @@
+images/
+*.swp
+resources/sg.csv
+src/js/data.json
